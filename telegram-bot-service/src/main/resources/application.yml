@@ -1,0 +1,42 @@
+server:
+  port: 8081
+
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:}
+    name: ${TELEGRAM_BOT_NAME:}
+  referee:
+    username: etozhealexis # mishashev4enko
+    id: 240989345 # 336847157
+  game-chat:
+    id: -958823256 # -1002006647780Ω
+
+spring:
+  application:
+    name: telegram-bot-service
+
+  datasource:
+    url: jdbc:postgresql://${DISTRICTS_DB_HOST:localhost}:${DISTRICTS_DB_PORT:5432}/districts-bot-db
+    username: ${DISTRICTS_DB_USER:postgres}
+    password: ${DISTRICTS_DB_PASSWORD:12345}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+
+
+  profiles:
+    active: dev
+
+integration:
+  internal:
+    host:
+      districts-service: http://localhost:8080
